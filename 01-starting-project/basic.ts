@@ -36,3 +36,10 @@ let people: {
     name: string;
     age: number;
 }[];
+
+
+// 
+
+let course = 'React - The Complete Guide';
+
+course = '12341';
