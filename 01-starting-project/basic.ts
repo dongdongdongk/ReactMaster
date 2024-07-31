@@ -44,13 +44,13 @@ let course = 'React - The Complete Guide';
 
 course = '12341';
 
-function add(a: number,b: number ) {
+function add2(a: number,b: number ) {
     return a + b;
 }
 
 // 제네릭
 
-function insertAtBee(array: any[],value: any ) {
+function insertAtBee<T>(array: T[],value: T ) {
     const newArray = [value, ...array]
     return newArray;
 }
