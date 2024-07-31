@@ -43,3 +43,18 @@ let people: {
 let course = 'React - The Complete Guide';
 
 course = '12341';
+
+function add(a: number,b: number ) {
+    return a + b;
+}
+
+// 제네릭
+
+function insertAtBee(array: any[],value: any ) {
+    const newArray = [value, ...array]
+    return newArray;
+}
+
+const demoArray = [1,2,3];
+
+const updateArray = insertAtBee(demoArray, -1)
