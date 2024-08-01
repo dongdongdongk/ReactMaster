@@ -1,6 +1,10 @@
 import React from "react";
 
-const Todos: React.FC<{ items: string[] }> = (props) => {
+type TodosProps = {
+    items: string[];
+};
+
+const Todos: React.FC<TodosProps> = (props) => {
     return (
         <ul>
             {props.items.map((item) => (
@@ -9,6 +13,5 @@ const Todos: React.FC<{ items: string[] }> = (props) => {
         </ul>
     );
 };
-
 
 export default Todos;
