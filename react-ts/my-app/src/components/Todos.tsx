@@ -1,6 +1,6 @@
 import React from "react";
 import Todo from "../models/todo";
-import TodoItem from "./todoItem";
+import TodoItem from "./TodoItem";
 
 type TodosProps = {
     items: Todo[];
