@@ -1,5 +1,5 @@
 import { useRef } from "react";
-
+import classes from "./NewTodo.module.css"
 // NewTodo 컴포넌트에 전달될 props의 타입을 정의
 interface NewTodoProps {
     // onAddTodo는 문자열을 인수로 받고 반환값이 없는 함수 타입임
@@ -34,7 +34,7 @@ const NewTodo: React.FC<NewTodoProps> = (props) => {
     };
 
     return (
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} className={classes.form}>
             {/* 텍스트 입력을 위한 label과 input 요소 */}
             <label htmlFor="text">Todo text</label>
 
