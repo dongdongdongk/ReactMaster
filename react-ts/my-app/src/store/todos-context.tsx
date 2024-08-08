@@ -1,17 +1,41 @@
-import React, { useState } from "react";
-import Todo from "../models/todo"
+import React, { ReactNode, useState } from "react";
+import Todo from "../models/todo";
 
-const TodosContext = React.createContext<{
-    items : Todo[];
-    addTodo : () => void;
-    removeTodo : (id : string) => void;
-}>({
-    items : [],
+type TodosContextObj = {
+    items: Todo[];
+    addTodo: (text: string) => void;
+    removeTodo: (id: string) => void;
+};
+
+export const TodosContext = React.createContext<TodosContextObj>({
+    items: [],
     addTodo: () => {},
-    removeTodo : (id: string) => {}
+    removeTodo: (id: string) => {}
 });
 
-const TodosContextProvider : React.FC = (props) => {
-    useState();
-    return <TodosContext.Provider>{props.children}</TodosContext.Provider>
-}
+const TodosContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [todos, setTodos] = useState<Todo[]>([]);
+
+    const addTodoHandler = (text: string) => {
+        const newTodo = new Todo(text);
+        setTodos((prevTodos) => [...prevTodos, newTodo]);
+    };
+
+    const removeTodoHandler = (todoId: string) => {
+        setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== todoId));
+    };
+
+    const contextValue: TodosContextObj = {
+        items: todos,
+        addTodo: addTodoHandler,
+        removeTodo: removeTodoHandler
+    };
+
+    return (
+        <TodosContext.Provider value={contextValue}>
+            {children}
+        </TodosContext.Provider>
+    );
+};
+
+export default TodosContextProvider;

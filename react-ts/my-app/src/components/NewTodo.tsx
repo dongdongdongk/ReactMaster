@@ -1,5 +1,6 @@
-import { useRef } from "react";
+import { useRef,useContext } from "react";
 import classes from "./NewTodo.module.css"
+import { TodosContext } from "../store/todos-context";
 // NewTodo 컴포넌트에 전달될 props의 타입을 정의
 interface NewTodoProps {
     // onAddTodo는 문자열을 인수로 받고 반환값이 없는 함수 타입임
@@ -7,7 +8,8 @@ interface NewTodoProps {
 }
 
 // NewTodo 함수형 컴포넌트 정의
-const NewTodo: React.FC<NewTodoProps> = (props) => {
+const NewTodo: React.FC = () => {
+    const todosCtx = useContext(TodosContext)
     // useRef 훅을 사용해 input 요소에 접근할 수 있는 참조 객체 생성
     // 초기값은 null로 설정되며, 이후 input 요소가 DOM에 렌더링된 후 참조됨
     const todoTextInputRef = useRef<HTMLInputElement>(null);
@@ -29,8 +31,8 @@ const NewTodo: React.FC<NewTodoProps> = (props) => {
             return;
         }
 
-        // 입력된 텍스트가 유효한 경우, 상위 컴포넌트(App)에서 전달받은 onAddTodo 함수 호출
-        props.onAddTodo(enteredText);
+        todosCtx.addTodo(enteredText)
+        
     };
 
     return (

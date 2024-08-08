@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Todo from './models/todo';
 import Todos from './components/Todos';
 import NewTodo from './components/NewTodo';
+import TodosContextProvider from './store/todos-context';
 
 function App() {
   // todos 배열을 useState로 관리
@@ -11,22 +12,11 @@ function App() {
     new Todo('타입스크립트 배우기')
   ]);
 
-  const addTodoHandler = (todoText: string) => {
-    const newTodo = new Todo(todoText);
-    setTodos((prevTodos) => prevTodos.concat(newTodo));
-  }
-
-  const removeTodoHandler = (todoId : string) => {
-    setTodos((prevTodos) => {
-      return prevTodos.filter(todo => todo.id !== todoId)
-    })
-  }
-
   return (
-    <div>
-      <NewTodo onAddTodo={addTodoHandler} />
-      <Todos items={todos} onRemoveTodo={removeTodoHandler} />
-    </div>
+    <TodosContextProvider>
+      <NewTodo  />
+      <Todos />
+    </TodosContextProvider>
   );
 }
 
